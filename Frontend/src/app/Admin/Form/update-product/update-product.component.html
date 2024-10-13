@@ -1,0 +1,46 @@
+<form [formGroup]="musicalForm" (ngSubmit)="updateMusical()">
+  <div class="mb-3">
+    <label for="music_name" class="form-label">Tên sản phẩm:</label>
+    <input type="text" class="form-control" formControlName="music_name" [ngClass]="{'is-invalid': musicalForm.get('music_name')?.invalid && musicalForm.get('music_name')?.touched}" />
+    <div *ngIf="musicalForm.controls['music_name'].errors?.['required']" class="alert alert-info mt-3">
+      Hãy nhập tên sản phẩm
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="music_price" class="form-label">Giá:</label>
+    <input type="number" class="form-control" formControlName="music_price" [ngClass]="{'is-invalid': musicalForm.get('music_price')?.invalid && musicalForm.get('music_price')?.touched}" />
+    <div *ngIf="musicalForm.controls['music_price'].errors?.['required']" class="alert alert-info mt-3">
+      Hãy nhập giá
+    </div>
+    <div *ngIf="musicalForm.controls['music_price'].errors?.['min']" class="alert alert-danger mt-3">Giá tối thiểu là 1000đ!</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="music_quantity" class="form-label">Số lượng tồn:</label>
+    <input type="number" class="form-control" formControlName="music_quantity" [ngClass]="{'is-invalid': musicalForm.get('music_quantity')?.invalid && musicalForm.get('music_quantity')?.touched}" />
+    <div *ngIf="musicalForm.controls['music_quantity'].errors?.['required']" class="alert alert-info mt-3">
+      Hãy nhập số lượng
+    </div>
+    <div *ngIf="musicalForm.controls['music_quantity'].errors?.['min']" class="alert alert-danger mt-3">Số lượng tối thiểu là 1!</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="music_category_id" class="form-label">Loại nhạc cụ:</label>
+    <select class="form-select" formControlName="music_category_id" [ngClass]="{'is-invalid': musicalForm.get('music_category_id')?.invalid && musicalForm.get('music_category_id')?.touched}">
+      <option *ngFor="let category of categories" [value]="category.category_id">
+        {{ category.category_name }}
+      </option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="music_Picture" class="form-label">Ảnh:</label>
+    <input type="file" class="form-control" (change)="onFileChange($event)" />
+    <div *ngIf="fileError" class="alert alert-warning mt-3">
+      Chỉ chấp nhận file jpg hoặc png
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="musicalForm.invalid || fileError">Cập nhật</button>
+</form>

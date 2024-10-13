@@ -1,0 +1,41 @@
+<div class="d-flex justify-content-sm-between mb-4">
+  <a class="btn btn-success" routerLink="add"><i class="fa fa-add"></i> Thêm mới</a>
+  <div class="form-outline" style="position: relative;">
+    <form [formGroup]="searchForm">
+      <input id="search-input" type="search" formControlName="searchQuery" class="form-control"
+        style="padding-right: 40px;" />
+    </form>
+    <i class="fas fa-search" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);"></i>
+  </div>
+</div>
+
+<table class="table table-bordered table-hover">
+  <thead class="table-primary">
+    <tr>
+      <th>ID</th>
+      <th>Tên nhạc cụ</th>
+      <th>Ảnh</th>
+      <th>Giá</th>
+      <th>Số lượng còn</th>
+      <th>Loại nhạc cụ</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let list of CategoryWithMusicalInsList">
+    <tr *ngFor="let musicalIns of list.instruments">
+      <td>{{ musicalIns.music_id }}</td>
+      <td>{{ musicalIns.music_name }}</td>
+      <td>
+        <img [src]="'http://localhost:8080/uploads/' + getEncodedImageUrl(musicalIns.music_img)"
+          alt="{{ musicalIns.music_name }}" width="100" height="100" />
+      </td>
+      <td>{{ musicalIns.music_price | currency:'VND':'symbol':'1.0-0' }}</td>
+      <td>{{ musicalIns.music_quantity }}</td>
+      <td>{{ list.category.category_name }}</td>
+      <td>
+        <button class="btn btn-sm btn-primary" (click)="editProduct(musicalIns.music_id)">Sửa</button>
+        <button class="btn btn-sm btn-danger" (click)="deleteProduct(musicalIns.music_id)">Xóa</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,154 @@
+<main class="page payment-page" *ngIf="login_active">
+    <section class="payment-form dark">
+        <div class="container">
+            <div class="block-heading text-center">
+                <h2 style="color: black; font-weight: bold;">Đặt Hàng</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card-details mt-4">
+                        <h3 class="title">Thông Tin Khách Hàng</h3>
+                        <form [formGroup]="CustomerForm" (ngSubmit)="onSubmit()" style="padding: 25px">
+                            <div class="row g-3">
+                                <div class="col-sm-7">
+                                    <label for="card-holder" class="form-label">Họ và tên</label>
+                                    <input id="card-holder" type="text" formControlName="customer_name"
+                                        class="form-control">
+                                </div>
+                                <div class="col-sm-8">
+                                    <label for="card-number" class="form-label">Số điện thoại</label>
+                                    <input id="card-number" type="text" class="form-control"
+                                        formControlName="customer_phone">
+                                </div>
+                                <div class="col-sm-8">
+                                    <label for="card-number" class="form-label">Địa chỉ nhận hàng</label>
+                                    <input id="card-number" type="text" class="form-control"
+                                        formControlName="customer_address">
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary w-100">Đặt Hàng</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="products">
+                        <h3 class="title">Danh Sách Sản Phẩm Đặt</h3>
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Hình ảnh</th>
+                                    <th scope="col">Tên sản phẩm</th>
+                                    <th scope="col">Số lượng</th>
+                                    <th scope="col">Giá</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr *ngFor="let item of carts">
+                                    <td>
+                                        <img [src]="'http://localhost:8080/uploads/' + getEncodedImageUrl(item.music_img)"
+                                            class="img-fluid" alt="Product Image" width="60">
+                                    </td>
+                                    <td>{{ item.music_name }}</td>
+                                    <td>{{ item.music_quantity }}</td>
+                                    <td>{{ item.music_price | currency:'':'':'1.0-0' }}₫</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="total d-flex justify-content-between mt-3">
+                            <strong>Tổng tiền</strong>
+                            <span class="price">{{ totalAmount | currency:'':'':'1.0-0' }}₫</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+<main class="page payment-page" *ngIf="!login_active">
+    <section class="payment-form dark">
+        <div class="container">
+            <div class="block-heading text-center">
+                <h2 style="color: black; font-weight: bold;">Đặt Hàng Cho Khách Không Dùng Tài Khoản</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card-details mt-4">
+                        <h3 class="title">Thông Tin Khách Hàng</h3>
+                        <form [formGroup]="CustomerForm" (ngSubmit)="buyNow()" style="padding: 25px">
+                            <div class="row g-3">
+                                <div class="col-sm-7">
+                                    <label for="card-holder" class="form-label">Họ và tên</label>
+                                    <input id="card-holder" type="text" formControlName="customer_name"
+                                        class="form-control">
+                                    <div *ngIf="CustomerForm.controls['customer_name'].invalid && CustomerForm.controls['customer_name'].touched"
+                                        class="alert alert-danger mt-3">
+                                        Điền họ tên!
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <label for="card-number" class="form-label">Số điện thoại</label>
+                                    <input id="card-number" type="text" class="form-control"
+                                        formControlName="customer_phone">
+                                    <div *ngIf="CustomerForm.controls['customer_phone'].invalid && CustomerForm.controls['customer_phone'].touched"
+                                        class="alert alert-danger mt-3">
+                                        Điền số điện thoại!
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <label for="card-number" class="form-label">Địa chỉ nhận hàng</label>
+                                    <input id="card-number" type="text" class="form-control"
+                                        formControlName="customer_address">
+                                    <div *ngIf="CustomerForm.controls['customer_address'].invalid && CustomerForm.controls['customer_address'].touched"
+                                        class="alert alert-danger mt-3">
+                                        Điền địa chỉ!
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" [disabled]="CustomerForm.invalid" class="btn btn-primary w-100">Đặt Hàng</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="products">
+                        <h3 class="title">Danh Sách Sản Phẩm Đặt</h3>
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Hình ảnh</th>
+                                    <th scope="col">Tên sản phẩm</th>
+                                    <th scope="col">Số lượng</th>
+                                    <th scope="col">Giá</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of buy">
+                                    <td>
+                                        <img [src]="'http://localhost:8080/uploads/' + getEncodedImageUrl(item.music_img)"
+                                            class="img-fluid" alt="Product Image" width="60">
+                                    </td>
+                                    <td>{{ item.music_name }}</td>
+                                    <td>{{ item.music_quantity }}</td>
+                                    <td>{{ item.music_price | currency:'':'':'1.0-0' }}₫</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="total d-flex justify-content-between mt-3">
+                            <strong>Tổng tiền</strong>
+                            <span class="price">{{ totalAmountbuy | currency:'':'':'1.0-0' }}₫</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>

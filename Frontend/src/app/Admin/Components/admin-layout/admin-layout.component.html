@@ -1,0 +1,101 @@
+<div id="wrapper">
+
+    <nav id="sidebar" class="bg-primary sidebar-dark">
+        <div class="sidebar-header p-3">
+            <a href="#"
+                class="sidebar-brand text-white text-decoration-none d-flex align-items-center justify-content-center">
+                <div class="sidebar-brand-text mx-3">Thinh <sup>Music</sup></div>
+            </a>
+        </div>
+
+        <ul class="list-unstyled">
+            <li class="nav-item">
+                <a class="nav-link text-white" routerLink="/admin"
+                    [ngClass]="{'active': currentRoute === '/admin' }">
+                    <i class="fas fa-fw fa-dashboard"></i>
+                    <span>Bảng điều khiển</span>
+                </a>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <li class="nav-item">
+                <a class="nav-link text-white" routerLink="category"
+                    [ngClass]="{'active': currentRoute === '/admin/category' || currentRoute === '/admin/category/add' || currentRoute.startsWith('/admin/category/')}">
+                    <i class="fas fa-fw fa-table-cells-large"></i>
+                    <span>Quản lý danh mục</span>
+                </a>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <li class="nav-item text-white">
+                <a class="nav-link text-white" routerLink="product"
+                    [ngClass]="{'active': currentRoute === '/admin/product' || currentRoute === '/admin/product/add' || currentRoute.startsWith('/admin/product/edit/')}">
+                    <i class="fas fa-fw fa-guitar"></i>
+                    <span>Quản lý sản phẩm</span>
+                </a>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <li class="nav-item text-white">
+                <a class="nav-link text-white" routerLink="order"
+                    [ngClass]="{'active': currentRoute === '/admin/order'}">
+                    <i class="fas fa-fw fa-file-lines"></i>
+                    <span>Quản lý đơn hàng</span>
+                </a>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <li class="nav-item text-white">
+                <a class="nav-link text-white" routerLink="customer"
+                    [ngClass]="{'active': currentRoute === '/admin/customer'}">
+                    <i class="fas fa-fw fa-person"></i>
+                    <span>Quản lý khách hàng</span>
+                </a>
+            </li>
+            
+            <hr class="sidebar-divider">
+
+            <li class="nav-item text-white">
+                <a class="nav-link text-white" routerLink="account"
+                    [ngClass]="{'active': currentRoute === '/admin/account'}">
+                    <i class="fas fa-fw fa-user-alt"></i>
+                    <span>Quản lý tài khoản</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="page-content-wrapper" class="flex-grow-1">
+        <div class="d-flex flex-column">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+                <div class="container-fluid">
+                    <button class="btn btn-primary" id="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a href="#">
+                                <i class="fas fa-user"></i> Xin chào, {{ username }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <button type="button" class="btn btn-danger" (click)="logout()">
+                                Đăng xuất 
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <div class="container-fluid py-4">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

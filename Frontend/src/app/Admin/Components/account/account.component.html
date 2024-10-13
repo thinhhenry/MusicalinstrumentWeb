@@ -1,0 +1,60 @@
+<h4 class="text-center">Quản lý tài khoản</h4>
+<ul class="nav nav-pills mb-3">
+    <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'user'" (click)="changeTab('user')">
+            Người dùng
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'admin'" (click)="changeTab('admin')">
+            Quản trị viên
+        </a>
+    </li>
+</ul>
+
+<div *ngIf="activeTab === 'user'">
+    <table class="table table-bordered table-hover">
+        <thead class="table-primary">
+            <tr>
+                <th>ID</th>
+                <th>Họ tên</th>
+                <th>Tài khoản</th>
+                <th>Quyền</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of UserList">
+                <td>{{ user.account_id }}</td>
+                <td>{{ user.customer_name }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.role }}</td>
+                <td><button [disabled]="role === 'admin'" class="btn btn-primary"(click)="updateAdRole(user.account_id, user.username)"><i class="fa fa-gear"></i></button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div *ngIf="activeTab === 'admin'">
+    <table class="table table-bordered table-hover">
+        <thead class="table-primary">
+            <tr>
+                <th>ID</th>
+                <th>Họ tên</th>
+                <th>Tài khoản</th>
+                <th>Quyền</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let ad of AdList">
+                <td>{{ ad.account_id }}</td>
+                <td>{{ ad.customer_name }}</td>
+                <td>{{ ad.username }}</td>
+                <td>{{ ad.role }}</td>
+                <td>{{ ad.password }}</td>
+                <td><button [disabled]="role === 'admin'" class="btn btn-danger" (click)="updateUsRole(ad.account_id, ad.username)"><i class="fa fa-user-xmark"></i></button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

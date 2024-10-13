@@ -1,0 +1,90 @@
+<nav class="navbar navbar-light bg-white mt-3">
+    <div class="container-fluid justify-content-center gap-3">
+        <span>Tra cứu đơn hàng</span>
+        <form class="d-flex">
+            <input [(ngModel)]="searchQuery" class="form-control me-2" type="search" placeholder="Nhập mã đơn hàng"
+                aria-label="Search" name="searchQuery">
+            <button class="btn btn-outline-success" (click)="onSearch()" type="button"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+</nav>
+<div class="list-group container" *ngIf="searchResults.length > 0">
+    <div class="list-group-item list-group-item-primary" aria-current="true" *ngFor="let result of searchResults">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Họ và tên: {{ result.customerName }}</h5>
+            <small>Mã đơn: {{ result.orderId }}</small>
+            <small>Thời gian đặt hàng: {{ result.orderId | date:'dd/MM/yyyy HH:mm:ss' }}</small>
+        </div>
+        <p class="mb-1">Địa chỉ nhận hàng: {{ result.customerAddress }}</p>
+        <small>Số điện thoại liên hệ: {{ result.customerPhone }}</small>
+        <button type="button" class="btn btn-primary" (click)="openOrderDetails(result.orderId)">
+            Xem chi tiết
+        </button>
+    </div>
+</div>
+
+<div class="list-group container" *ngIf="showNoResultsMessage">
+    <div class="list-group-item list-group-item-secondary" aria-current="true">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Không tìm thấy đơn hàng nào.</h5>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" [ngClass]="{'show d-block': isModalOpen, 'fade': !isModalOpen}" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thông tin đơn hàng</h5>
+                <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <strong>Tên khách hàng:</strong> {{ firstSelectedOrderDetail?.customerName }}
+                </div>
+                <div class="mb-3">
+                    <strong>Số điện thoại:</strong> {{ firstSelectedOrderDetail?.customerPhone }}
+                </div>
+                <div class="mb-3">
+                    <strong>Địa chỉ:</strong> {{ firstSelectedOrderDetail?.customerAddress }}
+                </div>
+                <div class="mb-3">
+                    <strong>Thời gian đặt hàng:</strong> {{ firstSelectedOrderDetail?.orderDate | date:'dd/MM/yyyy HH:mm:ss' }}
+                </div>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Tên sản phẩm</th>
+                            <th>Ảnh</th>
+                            <th>Giá</th>
+                            <th>Số lượng mua</th>
+                            <th>Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of selectedOrderDetails">
+                            <td>{{ item.musicName }}</td>
+                            <td><img [src]="'http://localhost:8080/uploads/' + getEncodedImageUrl(item.musicImg)"
+                                    alt="N/A" width="100" height="100" /></td>
+                            <td>{{ item.orderDetailsPrice | currency:'':'':'1.0-0'}}₫</td>
+                            <td>{{ item.orderDetailsQuantity }}</td>
+                            <td>{{ item.totalPrice | currency:'':'':'1.0-0'}}₫</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="mb-3 text-end">
+                    <h5 class="fw-bold">Tổng tiền: <span class="fw-bold" style="color: #C92127;">{{ firstSelectedOrderDetail?.orderTotal | currency:'':'':'1.0-0'}}₫</span></h5>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <span class="text-bg-dark" *ngIf="firstSelectedOrderDetail?.orderStatus === 0">Chờ xác nhận</span>
+                <span class="text-bg-primary" *ngIf="firstSelectedOrderDetail?.orderStatus === 1">Đã xác nhận và đang chuẩn bị hàng</span>
+                <span class="text-bg-success" *ngIf="firstSelectedOrderDetail?.orderStatus === 2">Đơn hàng đã được giao đến bạn</span>
+            </div>
+        </div>
+    </div>
+</div>

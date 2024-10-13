@@ -1,0 +1,33 @@
+<div class="d-flex justify-content-between">
+<div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+  <div class="card-header"><i class="fa fa-list"></i></div>
+  <div class="card-body">
+    <h5 class="card-title">Tổng số sản phẩm đang bán</h5>
+    <p class="card-text">{{ musicCount }}</p>
+  </div>
+</div>
+<div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+  <div class="card-header"><i class="fa fa-list"></i></div>
+  <div class="card-body">
+    <h5 class="card-title">Tổng số loại nhạc cụ đang bán</h5>
+    <p class="card-text">{{ categoryCount }}</p>
+  </div>
+</div>
+<div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+  <div class="card-header"><i class="fa fa-file-lines"></i></div>
+  <div class="card-body">
+    <h5 class="card-title">Tổng số đơn hàng</h5>
+    <p class="card-text">{{ orderCount }}</p>
+  </div>
+</div>
+<div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+  <div class="card-header"><i class="fa fa-dollar-sign"></i></div>
+  <div class="card-body">
+    <h5 class="card-title">Doanh thu tháng này</h5>
+    <p class="card-text">{{ Current_revenue | currency:'':'':'1.0-0'}}₫</p>
+  </div>
+</div>
+</div>
+<div style="width: 80%; margin: auto;">
+  <canvas id="canvas"></canvas>
+</div>

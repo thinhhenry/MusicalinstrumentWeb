@@ -1,0 +1,53 @@
+<div class="container mt-4">
+  <h2>Thêm Sản phẩm</h2>
+  <form [formGroup]="MusicalForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="music_name" class="form-label">Tên sản phẩm</label>
+      <input type="text" id="music_name" formControlName="music_name" class="form-control">
+      <div *ngIf="MusicalForm.controls['music_name'].errors?.['required']" class="alert alert-info mt-3">
+        Hãy nhập tên sản phẩm
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="music_price" class="form-label">Giá sản phẩm</label>
+      <input type="number" id="music_price" formControlName="music_price" class="form-control">
+      <div *ngIf="MusicalForm.controls['music_price'].errors?.['required']" class="alert alert-info mt-3">
+        Hãy nhập giá
+      </div>
+      <div *ngIf="MusicalForm.controls['music_price'].errors?.['min']" class="alert alert-danger mt-3">Giá tối thiểu là 1000đ!</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="music_quantity" class="form-label">Số lượng</label>
+      <input type="number" id="music_quantity" formControlName="music_quantity" class="form-control">
+      <div *ngIf="MusicalForm.controls['music_quantity'].errors?.['required']" class="alert alert-info mt-3">
+        Hãy nhập số lượng
+      </div>
+      <div *ngIf="MusicalForm.controls['music_quantity'].errors?.['min']" class="alert alert-danger mt-3">Số lượng tối thiểu là 1!</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="category_id" class="form-label">Chọn loại nhạc cụ</label>
+      <select formControlName="category_id" class="form-control" required>
+        <option value="" disabled selected>Chọn loại nhạc cụ</option>
+        <option *ngFor="let category of categories" [value]="category.category_id">{{ category.category_name }}</option>
+      </select>      
+      
+      <div *ngIf="MusicalForm.controls['category_id'].errors?.['required']" class="alert alert-info mt-3">
+        Hãy chọn một loại nhạc cụ
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="music_img" class="form-label">Ảnh</label>
+      <input type="file" id="music_img" (change)="onFileSelected($event)" class="form-control" required/>
+      <div *ngIf="fileError" class="alert alert-warning mt-3">
+         file bạn vừa chọn không phải hình ảnh (gợi ý: chọn file có định dạng jpg hoặc png)
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="MusicalForm.invalid || fileError">Thêm</button>
+  </form>
+
+</div>

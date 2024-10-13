@@ -1,0 +1,14 @@
+<div class="container mt-4">
+  <h2>Thêm Category</h2>
+  <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="name" class="form-label">Tên Category</label>
+      <input type="text" id="category_name" formControlName="category_name" class="form-control">
+      <div *ngIf="categoryForm.controls['category_name'].invalid && categoryForm.controls['category_name'].touched" class="alert alert-danger mt-3">
+        Tên category là bắt buộc!
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="categoryForm.invalid">Thêm</button>
+  </form>
+
+</div>

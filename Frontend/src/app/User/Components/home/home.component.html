@@ -1,0 +1,77 @@
+<section class="slider">
+    <div #heroSlider class="hero-slider">
+        <div class="single-slider active" style="background-image: url('img/slider.jpg')">
+        </div>
+        <div class="single-slider" style="background-image: url('img/slider1.jpg')">
+        </div>
+    </div>
+
+    <div class="slider-nav">
+        <button class="fa-solid fa-chevron-left" (click)="prevSlide()" style="color: #ffffff"></button>
+        <button class="fa-solid fa-chevron-right" (click)="nextSlide()" style="color: #ffffff"></button>
+    </div>
+</section>
+<section class="ftco-section ftco-category ftco-no-pt">
+    <div class="container">
+        <h3 style="margin-top: 1.5rem">Danh Mục Sản Phẩm</h3>
+        <hr style="font-weight:600;">
+        <div class="row category-container">
+            <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" *ngFor="let item of categories">
+                <div class="text px-3 py-1">
+                    <h2 class="mb-0"><a href="#" (click)="filterByCategory(item.category_id); $event.preventDefault();">{{ item.category_name }}</a></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="product_section">
+    <div class="container">
+        <div class="product_heading">
+            <h2>Sản phẩm nổi bật</h2>
+        </div>
+        <div class="product_container">
+            <div class="box">
+                <h3>Sản Phẩm Đang Bán</h3>
+                <div class="box-content">
+                    <ng-container *ngFor="let list of CategoryWithMusicalInsList">
+                        <ng-container *ngIf="!selectedCategoryId || list.category.category_id === selectedCategoryId">
+                            <ng-container *ngFor="let musicalins of list.instruments">
+                                <div class="instrument-item">
+                                    <div class="img-box">
+                                        <a routerLink="product-detail/{{musicalins.music_id}}">
+                                            <img [src]="'http://localhost:8080/uploads/' + getEncodedImageUrl(musicalins.music_img)"
+                                                 alt="{{ musicalins.music_name }}" width="100" height="100" />
+                                        </a>
+                                    </div>
+                                    <div class="detail-box">
+                                        <div class="text">
+                                            <h6>{{ musicalins.music_name }}</h6>
+                                            <h5>{{ musicalins.music_price | currency:'':'':'1.0-0'}}₫</h5>
+                                        </div>
+                                        <div class="like">
+                                            <h6>Like</h6>
+                                            <div class="star_container">
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-box">
+                                        <a href="#" (click)="addCart(musicalins.music_id, musicalins.music_name, musicalins.music_img, musicalins.music_price); $event.preventDefault();">
+                                            Thêm vào giỏ
+                                        </a>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    

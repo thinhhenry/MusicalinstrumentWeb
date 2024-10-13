@@ -1,0 +1,37 @@
+<section class="ftco-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mb-5 ftco-animate fadeInUp ftco-animated">
+                <a href="" class="image-popup"><img [src]="'http://localhost:8080/uploads/' + getEncodedImageUrl(musical.music_img)"
+                    alt="" /></a>
+            </div>
+            <div class="col-lg-6 product-details pl-md-5 ftco-animate fadeInUp ftco-animated">
+                <h3> {{ musical.music_name }} </h3>               
+                <p class="price"><span>{{ musical.music_price | currency:'':'':'1.0-0' }}₫</span></p>
+                <p>Những sản phẩm chất lượng cao. Giá rẻ
+                </p>
+                <div class="row mt-4">
+                    <div class="w-100"></div>
+                    <div class="input-group col-md-6 d-flex mb-3">
+                        <span class="input-group-btn mr-2">
+                            <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
+                                <i class="ion-ios-remove"></i>
+                            </button>
+                        </span>
+                        <input type="number" id="quantity" name="quantity" class="form-control input-number" [(ngModel)]="quantity" 
+                            min="1">
+                        <span class="input-group-btn ml-2">
+                            Số lượng hiện có: {{ musical.music_quantity }}
+                        </span>
+                    </div>
+                    <div class="w-100"></div>
+                    <div class="col-md-12">
+                        <p style="color: #000;">Danh mục: {{ categories?.category_name }}</p>
+                    </div>
+                </div>
+                <p><button type="button" class="btn btn-dark py-3 px-5" [disabled]="check === true" (click)="buyNow(musical.music_id, musical.music_name, musical.music_img, musical.music_price, quantity)">Mua ngay</button></p>
+                <span><i class="text-dark" *ngIf="check">(*): Chức năng chỉ dành cho khách hàng không phải người dùng</i></span>
+            </div>
+        </div>
+    </div>
+</section>

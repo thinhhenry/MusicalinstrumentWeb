@@ -1,0 +1,81 @@
+<h4 class="text-center">Đơn hàng của tôi</h4>
+<div class="list-group container">
+    <div class="list-group-item list-group-item-primary" aria-current="true" *ngFor="let result of OrderList">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Họ và tên: {{ result.customer_name }}</h5>
+            <small>Mã đơn: {{ result.order_id }}</small>
+            <small>Thời gian đặt hàng: {{ result.order_date| date:'dd/MM/yyyy HH:mm:ss' }}</small>
+        </div>
+        <p class="mb-1">Địa chỉ nhận hàng: {{ result.customer_address }}</p>
+        <small>Số điện thoại liên hệ: {{ result.customer_phone }}</small>
+        <button type="button" class="btn btn-primary" (click)="openOrderDetails(result.order_id)">
+            Xem chi tiết
+        </button>
+    </div>
+</div>
+
+<div class="list-group container" *ngIf="OrderList === []">
+    <div class="list-group-item list-group-item-secondary" aria-current="true">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Chưa có đơn hàng nào</h5>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" [ngClass]="{'show d-block': isModalOpen, 'fade': !isModalOpen}" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Thông tin đơn hàng</h5>
+                <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <strong>Tên khách hàng:</strong> {{ firstSelectedOrderDetail?.customerName }}
+                </div>
+                <div class="mb-3">
+                    <strong>Số điện thoại:</strong> {{ firstSelectedOrderDetail?.customerPhone }}
+                </div>
+                <div class="mb-3">
+                    <strong>Địa chỉ:</strong> {{ firstSelectedOrderDetail?.customerAddress }}
+                </div>
+                <div class="mb-3">
+                    <strong>Thời gian đặt hàng:</strong> {{ firstSelectedOrderDetail?.orderDate | date:'dd/MM/yyyy HH:mm:ss' }}
+                </div>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Tên sản phẩm</th>
+                            <th>Ảnh</th>
+                            <th>Giá</th>
+                            <th>Số lượng mua</th>
+                            <th>Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of selectedOrderDetails">
+                            <td>{{ item.musicName }}</td>
+                            <td><img [src]="'http://localhost:8080/uploads/' + getEncodedImageUrl(item.musicImg)"
+                                    alt="N/A" width="100" height="100" /></td>
+                            <td>{{ item.orderDetailsPrice | currency:'':'':'1.0-0'}}₫</td>
+                            <td>{{ item.orderDetailsQuantity }}</td>
+                            <td>{{ item.totalPrice | currency:'':'':'1.0-0'}}₫</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="mb-3 text-end">
+                    <h5 class="fw-bold">Tổng tiền: <span class="fw-bold" style="color: #C92127;">{{ firstSelectedOrderDetail?.orderTotal | currency:'':'':'1.0-0'}}₫</span></h5>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <span class="text-bg-dark" *ngIf="firstSelectedOrderDetail?.orderStatus === 0">Chờ xác nhận</span>
+                <span class="text-bg-primary" *ngIf="firstSelectedOrderDetail?.orderStatus === 1">Đã xác nhận và đang chuẩn bị hàng</span>
+                <span class="text-bg-success" *ngIf="firstSelectedOrderDetail?.orderStatus === 2">Đơn hàng đã được giao đến bạn</span>
+            </div>
+        </div>
+    </div>
+</div>

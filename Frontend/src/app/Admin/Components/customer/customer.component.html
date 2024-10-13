@@ -1,0 +1,18 @@
+<table class="table table-bordered table-hover">
+    <thead class="table-primary">
+        <tr>
+            <th>ID</th>
+            <th>Khách hàng</th>
+            <th>Số điện thoại</th>
+            <th>Địa chỉ</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let customer of CustomerList">
+            <td>{{ customer.customer_id }}</td>
+            <td>{{ customer.customer_name }}</td>
+            <td>{{ customer.customer_phone }}</td>
+            <td>{{ customer.customer_address }}</td>
+        </tr>
+    </tbody>
+</table>

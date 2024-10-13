@@ -1,0 +1,274 @@
+@import 'ngx-toastr/toastr';
+
+ul,
+li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    transition: all 0.3s ease;
+    outline: none;
+    box-shadow: none;
+    text-decoration: none;
+}
+
+a:visited {
+    color: inherit;
+}
+
+img {
+    height: 80px;
+    max-width: 100%;
+}
+
+p {
+    margin: 0;
+    line-height: 24px;
+    font-weight: 400;
+}
+
+/* Header */
+.header {
+    background-color: #fff;
+    position: relative;
+}
+
+/* = topbar = */
+.header .topbar {
+    padding: 15px 0;
+    background-color: #002c3e;
+    border-bottom: 1px solid #eee;
+}
+
+.header .top-link {
+    float: left;
+}
+
+header .top-link li {
+    display: inline-block;
+    margin-right: 15px;
+    color: white;
+}
+
+.header .top-link li a {
+    color: white;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.header .top-contact {
+    float: right;
+}
+
+.header .top-contact li {
+    display: inline-block;
+    margin-right: 25px;
+    color: white;
+}
+
+/* = topbar_end = */
+
+/* = header-inner = */
+.header .header-inner {
+    background: #fff;
+    z-index: 999;
+    width: 100%;
+}
+
+.header .logo {
+    float: left;
+    margin-top: 14px;
+}
+
+.header .nav li {
+    margin-right: 15px;
+    float: left;
+    position: relative;
+}
+
+.header .nav li a {
+    color: #2C2D3F;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: capitalize;
+    padding: 25px 12px;
+    position: relative;
+    display: inline-block;
+    position: relative;
+}
+
+.header .nav li.active a {
+    color: #1A76D1;
+}
+
+.header .nav li .dropdown {
+    background: #fff;
+    width: 220px;
+    position: absolute;
+    left: -20px;
+    top: 100%;
+    z-index: 999;
+    box-shadow: 0px 3px 5px #3333334d;
+    transform-origin: 0 0 0;
+    transform: scaleY(0.2);
+    transition: all 0.3s ease 0s;
+    opacity: 0;
+    visibility: hidden;
+    top: 74px;
+    border-left: 3px solid #2889e4;
+}
+
+.header .nav li .dropdown li:last-child {
+    border: none;
+}
+
+.header .nav li .dropdown li {
+    float: none;
+    margin: 0;
+    border-bottom: 1px dashed #eee;
+}
+
+.header .nav li .dropdown li a {
+    padding: 12px 15px;
+    color: #666;
+    display: block;
+    font-weight: 400;
+    text-transform: capitalize;
+    background: transparent;
+    transition: all 0.2s ease;
+}
+
+.header .nav li:last-child {
+    margin: 0;
+}
+
+.header .nav li .dropdown li:last-child a {
+    border-bottom: 0px;
+}
+
+/* = header-inner_end = */
+
+/* = slider = */
+.slider {
+    overflow: hidden;
+}
+
+.hero-slider {
+    display: flex;
+    transition: transform 1s ease-in-out;
+    width: 100%;
+}
+
+.single-slider {
+    width: 100%;
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+}
+
+.btn {
+    color: #fff;
+    padding: 13px 25px;
+    font-size: 14px;
+    text-transform: capitalize;
+    font-weight: 500;
+    background: #1A76D1;
+    position: relative;
+    box-shadow: none;
+    display: inline-block;
+    transition: all 0.4s ease;
+    transform: perspective(1px) translateZ(0);
+    border: none;
+    border-radius: 0;
+    border-radius: 4px;
+}
+
+.slider-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: none;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.slider-nav button {
+    background-color: orange;
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: all;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* footer */
+.ftco-footer {
+    font-size: 14px;
+    padding: 7em 0;
+    color: #000000;
+    background: #fbfbfb;
+}
+
+.ftco-footer .ftco-footer-widget h2 {
+    font-weight: normal;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.ftco-footer .ftco-footer-widget ul li {
+    font-size: 14px;
+    margin-bottom: 0px;
+}
+
+.ftco-footer-social li {
+    list-style: none;
+    margin: 0 10px 0 0;
+    display: inline-block;
+}
+
+.ftco-footer .ftco-footer-widget ul li a {
+    color: #000000;
+}
+
+.ftco-footer-social li a {
+    height: 50px;
+    width: 50px;
+    display: block;
+    float: left;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 50%;
+    position: relative;
+}
+
+.ftco-footer-social li a span {
+    position: absolute;
+    font-size: 26px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #000000;
+}
+.btn.dropdown-toggle {
+    padding: 0 !important;
+    font-size: 16px !important;
+    background-color: transparent !important;
+  }
+  li .dropdown-item{
+    color: #212529 !important;
+  }
+  

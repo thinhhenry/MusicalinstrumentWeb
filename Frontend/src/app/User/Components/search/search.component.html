@@ -1,0 +1,48 @@
+<section class="product_section">
+    <div class="container">
+        <div class="product_heading">
+            <h2>Sản phẩm nổi bật</h2>
+        </div>
+        <div class="product_container">
+            <div class="box">
+                <h3>Sản Phẩm Đang Bán</h3>
+                <div class="box-content">
+                    <ng-container *ngFor="let list of searchResults">
+                        <ng-container *ngFor="let musicalins of list.instruments">
+                            <div class="instrument-item">
+                                <div class="img-box">
+                                    <a routerLink="product-detail/{{musicalins.music_id}}">
+                                        <img [src]="'http://localhost:8080/uploads/' + getEncodedImageUrl(musicalins.music_img)"
+                                            alt="{{ musicalins.music_name }}" width="100" height="100" />
+                                    </a>
+                                </div>
+                                <div class="detail-box">
+                                    <div class="text">
+                                        <h6>{{ musicalins.music_name }}</h6>
+                                        <h5><span>$</span>{{ musicalins.music_price }}</h5>
+                                    </div>
+                                    <div class="like">
+                                        <h6>Like</h6>
+                                        <div class="star_container">
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="btn-box">
+                                    <a href="#"
+                                        (click)="addCart(musicalins.music_id, musicalins.music_name, musicalins.music_img, musicalins.music_price); $event.preventDefault();">
+                                        Thêm vào giỏ
+                                    </a>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

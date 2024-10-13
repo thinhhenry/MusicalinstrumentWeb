@@ -1,0 +1,39 @@
+<h4 class="text-center">Đăng ký</h4>
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="col-md-8"> 
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="customerName">Họ và tên</label>
+                    <input type="text" class="form-control" id="customerName" formControlName="customer_name"
+                        placeholder="Họ và tên" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="customerPhone">Số điện thoại</label>
+                    <input type="text" class="form-control" id="customerPhone" formControlName="customer_phone"
+                        placeholder="Số điện thoại" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="customerAddress">Địa chỉ</label>
+                    <input type="text" class="form-control" id="customerAddress" formControlName="customer_address"
+                        placeholder="Địa chỉ" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="username">Tên đăng nhập</label>
+                    <input type="text" class="form-control" id="username" formControlName="username"
+                        placeholder="Tên đăng nhập" (blur)="checkUsername()" required>
+                    <div *ngIf="usernameExists" class="text-danger">Tên đăng nhập đã tồn tại!</div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" class="form-control" id="password" formControlName="password"
+                        placeholder="Mật khẩu" required>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit" [disabled]="usernameExists || registerForm.invalid">Đăng
+                ký</button>
+        </form>
+    </div>
+</div>

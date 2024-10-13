@@ -1,0 +1,162 @@
+<header class="header">
+    <!-- Topbar -->
+    <div class="topbar">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-5 col-12">
+                    <ul class="top-link">
+                        <li><i class="fa fa-phone"></i>+84 1234 56789</li>
+                        <li>
+                            <i class="fa fa-envelope"></i><a href="#">thinh&#64;gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 col-md-7 col-12">
+                    <ul class="top-contact">
+                        <li>
+                            <a class="text-white" routerLink="search-order"><i class="fa fa-search"></i>Tra cứu đơn hàng</a>
+                        </li>
+                        <li *ngIf="username; else loginTemplate">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Xin chào, {{ username }}
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" routerLink="my-order">Đơn hàng của tôi</a></li>
+                                    <li><a class="dropdown-item" href="#" (click)="logout($event)">Đăng xuất</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <ng-template #loginTemplate>
+                            <li><a class="text-white" routerLink="login">Đăng nhập</a></li>
+                        </ng-template>
+                        <li>
+                            <a class="fa-solid fa-cart-shopping text-white" routerLink="shopping-cart"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-inner">
+        <div class="container">
+            <div class="inner">
+                <div class="container">
+                    <div class="row align-items-center justify-content-between">
+
+                        <div class="col-lg-3 col-md-3 col-6">
+                            <div class="logo">
+                                <a href="index.html"><img src="img/logo.png" alt="#" class="img-fluid" /></a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-5 col-12">
+                            <form [formGroup]="searchForm" class="input-group" (ngSubmit)="onSubmit()">
+                                <input type="search" class="form-control rounded" placeholder="Search"
+                                    aria-label="Search" aria-describedby="search-addon" formControlName="searchQuery" />
+                                <button type="submit" class="input-group-text border-0" id="search-addon">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="col-lg-5 col-md-4 col-12">
+                            <nav class="navigation">
+                                <ul class="nav menu justify-content-end">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="#">Trang chủ <i class="icofont-rounded-down"></i></a>
+                                    </li>                                  
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<router-outlet></router-outlet>
+<footer class="ftco-footer">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md">
+                <div class="ftco-footer-widget mb-4">
+                    <h2 class="ftco-heading-2">Về chúng tôi</h2>
+                    <p>
+                        Chúng tôi tự hào là địa chỉ cung cấp các loại nhạc cụ chất lượng cao, từ những cây đàn cổ điển
+                        đến những thiết bị âm thanh hiện đại. Mỗi sản phẩm đều được chúng tôi lựa chọn kỹ lưỡng để đảm
+                        bảo chất lượng tốt nhất, mang đến cho bạn âm thanh chân thực và sống động."
+                    </p>
+                    <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                        <li class="ftco-animate fadeInUp ftco-animated">
+                            <a href="#"><span class="icon-twitter"></span></a>
+                        </li>
+                        <li class="ftco-animate fadeInUp ftco-animated">
+                            <a href="#"><span class="fa-brands fa-facebook"></span></a>
+                        </li>
+                        <li class="ftco-animate fadeInUp ftco-animated">
+                            <a href="#"><span class="fa-brands fa-facebook-messenger"></span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md">
+                <div class="ftco-footer-widget mb-4 ml-md-5">
+                    <h2 class="ftco-heading-2">Hỗ trợ dịch vụ</h2>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="py-2 d-block">Tra cứu đơn hàng</a></li>
+                        <li><a href="#" class="py-2 d-block">Liên hệ</a></li>
+                        <li><a href="#" class="py-2 d-block">Bảo dưỡng</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- <div class="col-md-4">
+                <div class="ftco-footer-widget mb-4">
+                    <h2 class="ftco-heading-2">Help</h2>
+                    <div class="d-flex">
+                        <ul class="list-unstyled mr-l-5 pr-l-3 mr-4">
+                            <li>
+                                <a href="#" class="py-2 d-block">Shipping Information</a>
+                            </li>
+                            <li>
+                                <a href="#" class="py-2 d-block">Returns &amp; Exchange</a>
+                            </li>
+                            <li>
+                                <a href="#" class="py-2 d-block">Terms &amp; Conditions</a>
+                            </li>
+                            <li><a href="#" class="py-2 d-block">Privacy Policy</a></li>
+                        </ul>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-2 d-block">FAQs</a></li>
+                            <li><a href="#" class="py-2 d-block">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div> -->
+            <div class="col-md">
+                <div class="ftco-footer-widget mb-4">
+                    <h2 class="ftco-heading-2">Theo dõi ThinhMusic tại</h2>
+                    <div class="block-23 mb-3">
+                        <ul>
+                            <li>
+                                <span class="fa fa-map-location"></span><span class="text">203 Hoàng Hoa Thám,
+                                    Quận 1,
+                                    Tp. Hồ Chí Minh</span>
+                            </li>
+                            <li>
+                                <a href="#"><span class="fa fa-phone"></span><span class="text">+84 1234 567
+                                        8910</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><span class="fa fa-envelope"></span><span
+                                        class="text">thinh&#64;gmail.com</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

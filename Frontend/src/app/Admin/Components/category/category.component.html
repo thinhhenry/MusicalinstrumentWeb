@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-sm-between mb-4">
+    <a class="btn btn-success" routerLink="add"><i class="fa fa-add"></i> Thêm mới</a>
+    <div class="form-outline" style="position: relative;">
+        <form [formGroup]="searchForm">
+            <input id="search-input" type="search" formControlName="searchQuery" class="form-control"
+                style="padding-right: 40px;" />
+        </form>
+        <i class="fas fa-search" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);"></i>
+    </div>
+</div>
+
+<table class="table table-bordered table-hover">
+    <thead class="table-primary">
+        <tr>
+            <th>ID</th>
+            <th>Loại nhạc cụ</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let category of CategoryList">
+            <td>{{ category.category_id }}</td>
+            <td>{{ category.category_name }}</td>
+            <td>
+                <button class="btn btn-sm btn-primary" (click)="editCategory(category.category_id)">Sửa</button>
+                <button class="btn btn-sm btn-danger" (click)="deleteCategory(category.category_id)">Xóa</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
